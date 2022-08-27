@@ -148,7 +148,7 @@ saveRDS(rds,"CM_scRNA_names.rds")
 
 # 1.11 cell type and stastics
 
-scc_integrated <-readRDS("../4.单细胞部分/1.Dataset/scc_integrated_anno.rds")
+scc_integrated <-readRDS("scc_integrated_anno.rds")
 type <- as.character(scc_integrated@active.ident)
 # type$cell_type <- type$`scc_integrated@active.ident`
 type[type == "Neu"] = "Neuron"
@@ -322,7 +322,7 @@ p3 <- ggplot(treatment, aes(x = "", y = Freq,fill = Var2)) +
   labs(x = "", y = "")+
   theme(axis.ticks = element_blank())+
   theme(axis.text.x = element_blank()) + 
-  theme(panel.grid=element_blank()) +    ## 去掉白色圆框和中间的坐标线
+  theme(panel.grid=element_blank()) + 
   theme(panel.border=element_blank()) + 
   theme(plot.title = element_text(vjust = 0.5,hjust = 0.5,size = 15)) + 
   scale_fill_manual(values = c("Neuron" = '#E95C59',
@@ -351,7 +351,7 @@ p1+p2+p3 #5*15
 
 scRNA_markers = FindAllMarkers(scc_integrated,only.pos =T,logfc.threshold = 0.25)
 
-# scRNA_marker <- read.csv("../6.整合部分/scRNA_markers/scRNA_markers.csv")
+# scRNA_marker <- read.csv("scRNA_markers.csv")
 # scRNA_markers_top50 <- scRNA_markers %>% group_by(cluster) %>% top_n(n =50, wt = avg_log2FC)
 
 scRNA_Markers_num <- as.data.frame(table(scRNA_marker_all$cluster))
